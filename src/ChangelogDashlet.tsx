@@ -36,9 +36,9 @@ class ChangelogDashlet extends ComponentEx<IProps, IIssueListState> {
 
     this.nextState.current = Math.max(
       this.props.changelogs.findIndex(changelog => semver.gte(changelog.version, this.mAppVersion)),
-    0);
+      0);
 
-    }
+  }
 
   public UNSAFE_componentWillReceiveProps(nextProps: IProps) {
     if (this.props.changelogs !== nextProps.changelogs) {
@@ -83,21 +83,21 @@ class ChangelogDashlet extends ComponentEx<IProps, IIssueListState> {
 
     return (
       <div className='changelog-container'>
-      {
-        filteredChangelogs.length === 0 ? (        
-        <div className='changelog-entry'>No changelogs found</div>
+        {
+          filteredChangelogs.length === 0 ? (        
+            <div className='changelog-entry'>No changelogs found</div>
           ) : (
             filteredChangelogs.slice(0,10).map((changelog) => (
-                  <div className='changelog-entry' key={changelog.version}>
-                    <h4 className='changelog-title'>Version {changelog.version}</h4>
-                    <ReactMarkdown className='changelog-text'>
-                      {changelog.text}
-                    </ReactMarkdown>
-                  </div>
-                ))
-            )          
-            }  
-    </div>
+              <div className='changelog-entry' key={changelog.version}>
+                <h4 className='changelog-title'>Version {changelog.version}</h4>
+                <ReactMarkdown className='changelog-text'>
+                  {changelog.text}
+                </ReactMarkdown>
+              </div>
+            ))
+          )          
+        }  
+      </div>
     );
   }
 

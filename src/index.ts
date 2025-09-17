@@ -39,16 +39,16 @@ function updateReleases(store: Redux.Store<types.IState>): Promise<void> {
       
       //if ((persistentLogs.length !== len)  || (persistentLogs[len - 1].version !== releases[len - 1].name)) {
 
-        const changeLogs = releases.map(rel => ({
-          version: rel.name,
-          text: rel.body,
-          prerelease: rel.prerelease,
-        }));
+      const changeLogs = releases.map(rel => ({
+        version: rel.name,
+        text: rel.body,
+        prerelease: rel.prerelease,
+      }));
 
-        const copiedChangelogsArray = Array.from(changeLogs);
+      const copiedChangelogsArray = Array.from(changeLogs);
                 
-        const sortedChangelogs = copiedChangelogsArray.sort((a, b) => semver.compare(b.version, a.version));
-        store.dispatch(setChangelogs(sortedChangelogs));
+      const sortedChangelogs = copiedChangelogsArray.sort((a, b) => semver.compare(b.version, a.version));
+      store.dispatch(setChangelogs(sortedChangelogs));
       //}
       
     });
@@ -61,12 +61,12 @@ function main(context: types.IExtensionContext) {
   context.registerReducer(['persistent', 'changelogs'], sessionReducer);
 
   context.registerDashlet('Changelog', 1, 3, 200, ChangelogDashlet,
-    (state: types.IState) => true,
-  () => ({}), { closable: true });
+                          (state: types.IState) => true,
+                          () => ({}), { closable: true });
 
   context.once(() => {
     context.api.setStylesheet('changelog',
-      path.join(__dirname, 'changelog.scss'));
+                              path.join(__dirname, 'changelog.scss'));
     updateReleases(context.api.store)
       .catch(err => {
         log('warn', 'failed to retrieve list of releases', err.message);
