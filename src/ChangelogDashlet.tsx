@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import * as semver from 'semver';
 import { ComponentEx, Dashlet, util } from 'vortex-api';
-import ReactMarkdown from 'react-markdown';
+const ReactMarkdown = require('react-markdown');
 import { Changelog } from './types';
 
 interface IConnectedProps {
